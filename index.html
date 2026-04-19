@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Приглашение на свадьбу</title>
+    <!-- Шрифты из Google (Эстетичные и бесплатные) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Эстетичный пастельный градиент */
+            background: linear-gradient(145deg, #f9f3ea 0%, #e8dccc 100%);
+            font-family: 'Cormorant Garamond', serif;
+            color: #3e3a36;
+            padding: 20px;
+        }
+
+        .invitation-card {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* Декоративная линия сверху */
+        .decor-line {
+            width: 80px;
+            height: 1px;
+            background: #a58d7c;
+            margin: 0 auto 30px auto;
+        }
+
+        .intro-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: #7a6b5d;
+            margin-bottom: 20px;
+        }
+
+        .names {
+            font-size: clamp(36px, 10vw, 68px);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #2c2824;
+        }
+
+        .ampersand {
+            font-size: 0.7em;
+            font-style: italic;
+            font-weight: 100;
+            margin: 0 5px;
+            color: #a58d7c;
+        }
+
+        .date-block {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 18px;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            color: #5a4e44;
+        }
+
+        .invite-text {
+            font-size: 22px;
+            font-style: italic;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Таймер */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 65px;
+        }
+
+        .countdown-number {
+            font-size: 42px;
+            font-weight: 300;
+            line-height: 1;
+            color: #2c2824;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .countdown-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #7a6b5d;
+            margin-top: 5px;
+        }
+
+        .details {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            line-height: 2;
+            color: #4a423b;
+            margin-bottom: 40px;
+        }
+
+        .button {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #a58d7c;
+            padding: 14px 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #3e3a36;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border-radius: 30px;
+            font-weight: 400;
+        }
+
+        .button:hover {
+            background: #a58d7c;
+            color: white;
+            border-color: #a58d7c;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            font-size: 12px;
+            opacity: 0.6;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Адаптация под телефоны */
+        @media (max-width: 480px) {
+            .invitation-card {
+                padding: 35px 20px;
+            }
+            .countdown {
+                gap: 10px;
+            }
+            .countdown-number {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-card">
+        <div class="decor-line"></div>
+        <div class="intro-text">Свадьба</div>
+        
+        <!-- ЗДЕСЬ МЕНЯЕМ ИМЕНА -->
+        <div class="names">
+            Константин <span class="ampersand">&</span> Анастасия
+        </div>
+        
+        <!-- ЗДЕСЬ МЕНЯЕМ ДАТУ -->
+        <div class="date-block">05• 06• 2026</div>
+        
+        <div class="invite-text">
+            Дорогие гости!<br>
+            Приглашаем Вас стать частью самого важного дня в нашей жизни.
+Мы будем счастливы разделить его с вами!
+        </div>
+
+        <!-- ТАЙМЕР ОБРАТНОГО ОТСЧЕТА (установите свою дату в JavaScript внизу) -->
+        <div class="countdown" id="timer">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Дней</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Часов</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Минут</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Секунд</span>
+            </div>
+        </div>
+
+        <!-- ДЕТАЛИ МЕРОПРИЯТИЯ (меняем здесь) -->
+        <div class="details">
+            📍 Ресторан «Перцы»<br>
+            🕓 Сбор гостей в 18:00<br>
+            🎩 Дресс-код: Свободный 
+        </div>
+
+        <!-- КНОПКА ДЛЯ ПОДТВЕРЖДЕНИЯ (меняем ссылку на свой WhatsApp/Telegram) -->
+        <a href="#" class="button" id="confirmBtn">Подтвердить присутствие</a>
+        
+        <div class="footer-note">
+            Будем благодарны за ответ до 30.05.2026
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // НАСТРОЙКИ САЙТА: ПОМЕНЯЙТЕ ЭТИ ДАННЫЕ !!!
+        // ==========================================
+        
+        // 1. ССЫЛКА ДЛЯ КНОПКИ (WhatsApp или Telegram)
+        // Пример WhatsApp: https://wa.me/79509788977?text=Подтверждаю%20участие%20в%20свадьбе!
+        // Пример Telegram: https://t.me/sammusbak
+        const confirmationLink = "https://wa.me/79001234567?text=Здравствуйте!%20Подтверждаю%20присутствие%20на%20свадьбе.";
+        
+        // 2. ДАТА СВАДЬБЫ (Важно: месяц в JS считается от 0 до 11, поэтому Июль = 6)
+        // Формат: Год, Месяц (0-11), День, Час, Минута
+        const weddingDate = new Date(2026, 5, 5, 16, 0, 0); // 15 Июля 2026, 16:00
+        
+        // ==========================================
+        // НИЖЕ НИЧЕГО МЕНЯТЬ НЕ НУЖНО (ЛОГИКА ТАЙМЕРА И КНОПКИ)
+        // ==========================================
+        
+        // Применяем ссылку к кнопке
+        document.getElementById('confirmBtn').href = confirmationLink;
+        
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = weddingDate.getTime() - now;
+            
+            if (distance < 0) {
+                // Если дата прошла
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                document.querySelector('.invite-text').innerHTML = 'Мы уже муж и жена! Спасибо, что были с нами! ❤️';
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+        
+        // Запускаем таймер и обновляем каждую секунду
+        updateTimer();
+        setInterval(updateTimer, 1000);
+        
+        // Для красоты открываем ссылку в том же окне (для WhatsApp/Telegram это ок)
+        // Дополнительно можно сделать предупреждение, если ссылка не настроена
+        document.getElementById('confirmBtn').addEventListener('click', function(e) {
+            if (confirmationLink === "#") {
+                e.preventDefault();
+                alert("Пожалуйста, укажите номер телефона или ссылку в коде (переменная confirmationLink)");
+            }
+        });
+    </script>
+
+</body>
+</html>
