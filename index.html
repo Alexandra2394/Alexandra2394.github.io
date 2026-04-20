@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Приглашение на свадьбу</title>
-    <!-- Шрифты из Google (Эстетичные и бесплатные) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>Константин и Анастасия | Приглашение на свадьбу</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,82 +13,321 @@
         }
 
         body {
-            min-height: 100vh;
+            font-family: 'Cormorant Garamond', serif;
+            background: #ffffff;
+            overflow: hidden;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        /* Контейнер слайдов */
+        .slides-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .slides-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Общие стили для всех слайдов */
+        .slide {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Эстетичный пастельный градиент */
-            background: linear-gradient(145deg, #f9f3ea 0%, #e8dccc 100%);
-            font-family: 'Cormorant Garamond', serif;
-            color: #3e3a36;
             padding: 20px;
+            position: relative;
+            background-color: #1a1a1a;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .invitation-card {
-            max-width: 700px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.65);
+        /* Затемнение для всех слайдов с фото */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1;
+        }
+
+        /* Индивидуальные настройки фона */
+        .slide-1 {
+            background-image: url('https://i.ibb.co/4Zdpwy9G/29-C645-F7-2-E82-41-F6-8-A41-40-F6824-E3-CC7.webp');
+        }
+        .slide-1::before {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .slide-2 {
+            background-image: url('https://i.ibb.co/gM1Jj5Gd/IMG-7104.jpg');
+        }
+        .slide-2::before {
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
-            padding: 50px 30px;
+        }
+
+        .slide-3 {
+            background-image: url('https://i.ibb.co/prQqFBnM/IMG-7109.jpg');
+        }
+        .slide-3::before {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+
+        .slide-4 {
+            background-image: url('https://i.ibb.co/ZpyN8RJK/IMG-7119.jpg');
+        }
+        .slide-4::before {
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+
+        .slide-5 {
+            background-image: url('https://i.ibb.co/Xf9qVrc9/IMG-7108.jpg');
+        }
+        .slide-5::before {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .slide-6 {
+            background: #f0f0f0;
+        }
+        .slide-6::before {
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .content {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 0.5px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.04);
+            padding: 50px 35px;
             text-align: center;
-            border-radius: 4px;
+            border-radius: 2px;
+            position: relative;
+            z-index: 2;
             transition: all 0.3s ease;
         }
 
-        /* Декоративная линия сверху */
+        /* Для слайдов с фото — более прозрачная подложка */
+        .slide-1 .content,
+        .slide-2 .content,
+        .slide-3 .content,
+        .slide-4 .content,
+        .slide-5 .content {
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 0.5px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* Текст на слайдах с фото — белый */
+        .slide-1 .names,
+        .slide-1 .invite-text,
+        .slide-2 .big-date,
+        .slide-2 .date-label,
+        .slide-2 div[style*="День, когда мы станем семьёй"],
+        .slide-3 .location-name,
+        .slide-3 .location-address,
+        .slide-3 .date-label,
+        .slide-4 .program-title,
+        .slide-4 .program-time,
+        .slide-4 .date-label,
+        .slide-4 .subtle-text,
+        .slide-5 .countdown-number,
+        .slide-5 .countdown-label,
+        .slide-5 .date-label,
+        .slide-5 .subtle-text {
+            color: #ffffff !important;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .slide-1 .decor-line,
+        .slide-2 .decor-line,
+        .slide-3 .decor-line,
+        .slide-4 .decor-line,
+        .slide-5 .decor-line {
+            background: rgba(255, 255, 255, 0.7) !important;
+        }
+
+        .slide-1 .names span,
+        .slide-3 .location-address {
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+
+        /* Навигация (точки) */
+        .nav-dots {
+            position: fixed;
+            bottom: 25px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+        }
+
+        .dot.active {
+            width: 30px;
+            border-radius: 10px;
+            background: #1a1a1a;
+        }
+
+        /* Стрелки навигации */
+        .nav-arrow {
+            position: fixed;
+            bottom: 18px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 300;
+            color: #333;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+            background: #fff;
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .arrow-left {
+            left: 15px;
+        }
+
+        .arrow-right {
+            right: 15px;
+        }
+
+        /* Декоративная линия — длинная и изящная */
         .decor-line {
-            width: 80px;
-            height: 1px;
-            background: #a58d7c;
-            margin: 0 auto 30px auto;
+            width: 70px;
+            height: 0.5px;
+            background: #888;
+            margin: 0 auto 35px auto;
         }
 
-        .intro-text {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            font-size: 12px;
-            color: #7a6b5d;
-            margin-bottom: 20px;
-        }
-
+        /* Типографика */
         .names {
-            font-size: clamp(36px, 10vw, 68px);
+            font-size: clamp(42px, 12vw, 72px);
             font-weight: 300;
-            line-height: 1.2;
-            margin-bottom: 15px;
-            color: #2c2824;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            letter-spacing: 2px;
         }
 
-        .ampersand {
-            font-size: 0.7em;
+        .names span {
+            font-size: 0.65em;
             font-style: italic;
-            font-weight: 100;
-            margin: 0 5px;
-            color: #a58d7c;
-        }
-
-        .date-block {
-            font-family: 'Montserrat', sans-serif;
             font-weight: 300;
-            font-size: 18px;
-            letter-spacing: 4px;
-            margin-bottom: 40px;
-            color: #5a4e44;
+            margin: 0 12px;
+            color: #666;
         }
 
         .invite-text {
-            font-size: 22px;
-            font-style: italic;
-            margin-bottom: 40px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        .big-date {
+            font-size: clamp(52px, 15vw, 85px);
+            font-weight: 300;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+        }
+
+        .date-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #777;
+        }
+
+        .location-name {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            letter-spacing: 2px;
+        }
+
+        .location-address {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            color: #666;
+            line-height: 1.8;
+            letter-spacing: 1.5px;
+        }
+
+        .program-item {
+            margin-bottom: 28px;
+        }
+
+        .program-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 5px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .program-title {
+            font-size: 24px;
+            font-weight: 300;
+            color: #1a1a1a;
         }
 
         /* Таймер */
@@ -97,7 +335,7 @@
             display: flex;
             justify-content: center;
             gap: 25px;
-            margin-bottom: 50px;
+            margin-top: 25px;
             flex-wrap: wrap;
         }
 
@@ -105,165 +343,449 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 65px;
+            min-width: 60px;
         }
 
         .countdown-number {
-            font-size: 42px;
+            font-size: 40px;
             font-weight: 300;
             line-height: 1;
-            color: #2c2824;
-            font-family: 'Cormorant Garamond', serif;
+            color: #1a1a1a;
         }
 
         .countdown-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
+            font-size: 9px;
+            font-weight: 300;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #7a6b5d;
-            margin-top: 5px;
+            letter-spacing: 3px;
+            color: #888;
+            margin-top: 8px;
         }
 
-        .details {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            line-height: 2;
-            color: #4a423b;
-            margin-bottom: 40px;
+        /* Форма анкеты */
+        .form-group {
+            margin-bottom: 22px;
+            text-align: left;
         }
 
-        .button {
-            display: inline-block;
-            background: transparent;
-            border: 1px solid #a58d7c;
-            padding: 14px 40px;
+        .form-group label {
+            display: block;
             font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
+            font-size: 10px;
+            font-weight: 400;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: #3e3a36;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            border-radius: 30px;
-            font-weight: 400;
+            color: #666;
+            margin-bottom: 10px;
         }
 
-        .button:hover {
-            background: #a58d7c;
-            color: white;
-            border-color: #a58d7c;
-        }
-
-        .footer-note {
-            margin-top: 40px;
-            font-size: 12px;
-            opacity: 0.6;
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 0.5px solid rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 0;
             font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 300;
+            color: #1a1a1a;
+            outline: none;
+            transition: border 0.3s ease;
         }
 
-        /* Адаптация под телефоны */
+        .form-group input:focus {
+            border-color: #333;
+            background: #fff;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+            font-weight: 300;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 0.5px solid #333;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            cursor: pointer;
+            border-radius: 0;
+            transition: all 0.4s ease;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .form-note {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #888;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success-message {
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Индикатор свайпа */
+        .swipe-hint {
+            position: fixed;
+            bottom: 75px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.2);
+            z-index: 90;
+        }
+
+        /* Тонкий дополнительный текст */
+        .subtle-text {
+            margin-top: 30px;
+            font-size: 14px;
+            font-weight: 300;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Адаптация */
         @media (max-width: 480px) {
-            .invitation-card {
-                padding: 35px 20px;
+            .content {
+                padding: 40px 22px;
+            }
+            .nav-arrow {
+                display: none;
+            }
+            .invite-text {
+                font-size: 18px;
             }
             .countdown {
-                gap: 10px;
+                gap: 12px;
             }
             .countdown-number {
-                font-size: 32px;
+                font-size: 34px;
+            }
+            .names {
+                font-size: clamp(38px, 11vw, 60px);
+            }
+            .decor-line {
+                width: 60px;
+                margin: 0 auto 30px auto;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="invitation-card">
-        <div class="decor-line"></div>
-        <div class="intro-text">Свадьба</div>
+    <div class="slides-container" id="slidesContainer">
         
-        <!-- ЗДЕСЬ МЕНЯЕМ ИМЕНА -->
-        <div class="names">
-            Константин <span class="ampersand">&</span> Анастасия
-        </div>
-        
-        <!-- ЗДЕСЬ МЕНЯЕМ ДАТУ -->
-        <div class="date-block">05• 06• 2026</div>
-        
-        <div class="invite-text">
-            Дорогие гости!<br>
-            Приглашаем Вас стать частью самого важного дня в нашей жизни.
-Мы будем счастливы разделить его с вами!
-        </div>
-
-        <!-- ТАЙМЕР ОБРАТНОГО ОТСЧЕТА (установите свою дату в JavaScript внизу) -->
-        <div class="countdown" id="timer">
-            <div class="countdown-item">
-                <span class="countdown-number" id="days">00</span>
-                <span class="countdown-label">Дней</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="hours">00</span>
-                <span class="countdown-label">Часов</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="minutes">00</span>
-                <span class="countdown-label">Минут</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="seconds">00</span>
-                <span class="countdown-label">Секунд</span>
+        <!-- СЛАЙД 1: Имена и приглашение -->
+        <div class="slide slide-1" id="slide1">
+            <div class="content">
+                <div class="decor-line"></div>
+                <div class="names">
+                    Константин <span>&</span> Анастасия
+                </div>
+                <div class="invite-text">
+                    Приглашаем Вас стать частью самого важного дня в нашей жизни.
+                </div>
+                <div class="invite-text" style="font-size: 18px; margin-top: 25px;">
+                    Мы будем счастливы разделить его с вами!
+                </div>
             </div>
         </div>
 
-        <!-- ДЕТАЛИ МЕРОПРИЯТИЯ (меняем здесь) -->
-        <div class="details">
-            📍 Ресторан «Перцы»<br>
-            🕓 Сбор гостей в 18:00<br>
-            🎩 Дресс-код: Свободный 
+        <!-- СЛАЙД 2: Дата -->
+        <div class="slide slide-2" id="slide2">
+            <div class="content">
+                <div class="decor-line"></div>
+                <div class="big-date">05.06.2026</div>
+                <div class="date-label">Пятница</div>
+                <div style="margin-top: 35px; font-size: 26px; font-weight: 300; font-style: italic;">
+                    День, когда мы станем семьёй
+                </div>
+            </div>
         </div>
 
-        <!-- КНОПКА ДЛЯ ПОДТВЕРЖДЕНИЯ (меняем ссылку на свой WhatsApp/Telegram) -->
-        <a href="#" class="button" id="confirmBtn">Подтвердить присутствие</a>
-        
-        <div class="footer-note">
-            Будем благодарны за ответ до 30.05.2026
+        <!-- СЛАЙД 3: Локация -->
+        <div class="slide slide-3" id="slide3">
+            <div class="content">
+                <div class="decor-line"></div>
+                <div class="date-label" style="margin-bottom: 25px;">Будем ждать вас</div>
+                <div class="location-name">Ресторан «Перцы»</div>
+                <div class="location-address">
+                    7 микрорайон 1а
+                </div>
+                <div class="subtle-text">
+                    ⎯
+                </div>
+            </div>
+        </div>
+
+        <!-- СЛАЙД 4: Программа дня (с новым фото) -->
+        <div class="slide slide-4" id="slide4">
+            <div class="content">
+                <div class="decor-line"></div>
+                <div class="date-label" style="margin-bottom: 35px;">Программа дня</div>
+                <div class="program-item">
+                    <div class="program-time">11:30</div>
+                    <div class="program-title">Торжественная церемония в ЗАГСе</div>
+                </div>
+                <div class="program-item">
+                    <div class="program-time">18:00</div>
+                    <div class="program-title">Начало банкета</div>
+                </div>
+                <div class="subtle-text">
+                    Будем рады видеть вас на всём празднике
+                </div>
+            </div>
+        </div>
+
+        <!-- СЛАЙД 5: Таймер -->
+        <div class="slide slide-5" id="slide5">
+            <div class="content">
+                <div class="decor-line"></div>
+                <div class="date-label" style="margin-bottom: 25px;">До свадьбы осталось</div>
+                <div class="countdown" id="timer">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Дней</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Часов</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Минут</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Секунд</span>
+                    </div>
+                </div>
+                <div class="subtle-text">
+                    Ждём с нетерпением
+                </div>
+            </div>
+        </div>
+
+        <!-- СЛАЙД 6: Анкета гостя -->
+        <div class="slide slide-6" id="slide6">
+            <div class="content">
+                <div class="decor-line"></div>
+                <div class="date-label" style="margin-bottom: 20px;">Анкета гостя</div>
+                <div class="form-note">
+                    Подтвердите своё присутствие до 30.05.2026
+                </div>
+                
+                <form id="guestForm">
+                    <div class="form-group">
+                        <label>Имя и фамилия</label>
+                        <input type="text" id="guestName" placeholder="Например: Иванова Анна" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Дополнительные гости</label>
+                        <input type="text" id="guestPlus" placeholder="Если с семьёй/парой — все имена">
+                    </div>
+                    <button type="submit" class="submit-btn">Отправить</button>
+                </form>
+                
+                <div class="success-message" id="successMessage">
+                    Спасибо! Ваш ответ отправлен
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Точки навигации -->
+    <div class="nav-dots" id="navDots"></div>
+    
+    <!-- Стрелки -->
+    <div class="nav-arrow arrow-left" id="arrowLeft">←</div>
+    <div class="nav-arrow arrow-right" id="arrowRight">→</div>
+    
+    <!-- Подсказка -->
+    <div class="swipe-hint">← листайте →</div>
+
     <script>
         // ==========================================
-        // НАСТРОЙКИ САЙТА: ПОМЕНЯЙТЕ ЭТИ ДАННЫЕ !!!
+        // НАСТРОЙКИ
         // ==========================================
         
-        // 1. ССЫЛКА ДЛЯ КНОПКИ (WhatsApp или Telegram)
-        // Пример WhatsApp: https://wa.me/79509788977?text=Подтверждаю%20участие%20в%20свадьбе!
-        // Пример Telegram: https://t.me/sammusbak
-        const confirmationLink = "https://wa.me/79001234567?text=Здравствуйте!%20Подтверждаю%20присутствие%20на%20свадьбе.";
-        
-        // 2. ДАТА СВАДЬБЫ (Важно: месяц в JS считается от 0 до 11, поэтому Июль = 6)
-        // Формат: Год, Месяц (0-11), День, Час, Минута
-        const weddingDate = new Date(2026, 5, 5, 16, 0, 0); // 15 Июля 2026, 16:00
+        const weddingDate = new Date(2026, 5, 5, 11, 30, 0);
+        const phoneNumber = "79135373314";
         
         // ==========================================
-        // НИЖЕ НИЧЕГО МЕНЯТЬ НЕ НУЖНО (ЛОГИКА ТАЙМЕРА И КНОПКИ)
+        // ЛОГИКА СЛАЙДОВ И НАВИГАЦИИ
         // ==========================================
         
-        // Применяем ссылку к кнопке
-        document.getElementById('confirmBtn').href = confirmationLink;
+        const container = document.getElementById('slidesContainer');
+        const slides = document.querySelectorAll('.slide');
+        const navDots = document.getElementById('navDots');
+        const arrowLeft = document.getElementById('arrowLeft');
+        const arrowRight = document.getElementById('arrowRight');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let autoSlideInterval;
+        let isUserInteracting = false;
+        
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('dot');
+            dot.setAttribute('aria-label', `Слайд ${i + 1}`);
+            dot.addEventListener('click', () => {
+                goToSlide(i);
+                resetAutoSlide();
+            });
+            navDots.appendChild(dot);
+        }
+        
+        const dots = document.querySelectorAll('.dot');
+        
+        function updateDots(index) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+        
+        function goToSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= totalSlides) index = totalSlides - 1;
+            currentSlide = index;
+            slides[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            updateDots(index);
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            } else {
+                goToSlide(0);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            } else {
+                goToSlide(totalSlides - 1);
+            }
+        }
+        
+        // Автоматическое перелистывание
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                if (!isUserInteracting) {
+                    nextSlide();
+                }
+            }, 6000); // 6 секунд
+        }
+        
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+        
+        function resetAutoSlide() {
+            stopAutoSlide();
+            startAutoSlide();
+        }
+        
+        // Отслеживание взаимодействия пользователя
+        container.addEventListener('touchstart', () => {
+            isUserInteracting = true;
+        });
+        
+        container.addEventListener('touchend', () => {
+            setTimeout(() => {
+                isUserInteracting = false;
+            }, 1000);
+        });
+        
+        container.addEventListener('mousedown', () => {
+            isUserInteracting = true;
+        });
+        
+        container.addEventListener('mouseup', () => {
+            setTimeout(() => {
+                isUserInteracting = false;
+            }, 1000);
+        });
+        
+        // Отслеживание скролла для обновления точек
+        let scrollTimeout;
+        container.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const slideWidth = slides[0].clientWidth;
+                const newIndex = Math.round(container.scrollLeft / slideWidth);
+                if (newIndex !== currentSlide) {
+                    currentSlide = newIndex;
+                    updateDots(currentSlide);
+                }
+            }, 50);
+        });
+        
+        // Стрелки
+        arrowLeft.addEventListener('click', () => {
+            prevSlide();
+            resetAutoSlide();
+        });
+        
+        arrowRight.addEventListener('click', () => {
+            nextSlide();
+            resetAutoSlide();
+        });
+        
+        // Свайп-подсказка исчезает после первого взаимодействия
+        const swipeHint = document.querySelector('.swipe-hint');
+        container.addEventListener('touchstart', () => {
+            swipeHint.style.opacity = '0';
+            setTimeout(() => swipeHint.style.display = 'none', 300);
+        }, { once: true });
+        
+        // Запуск автослайда
+        startAutoSlide();
+        
+        updateDots(0);
+        
+        // ==========================================
+        // ТАЙМЕР
+        // ==========================================
         
         function updateTimer() {
             const now = new Date().getTime();
             const distance = weddingDate.getTime() - now;
             
             if (distance < 0) {
-                // Если дата прошла
                 document.getElementById('days').innerText = '00';
                 document.getElementById('hours').innerText = '00';
                 document.getElementById('minutes').innerText = '00';
                 document.getElementById('seconds').innerText = '00';
-                document.querySelector('.invite-text').innerHTML = 'Мы уже муж и жена! Спасибо, что были с нами! ❤️';
                 return;
             }
             
@@ -278,19 +800,49 @@
             document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
         }
         
-        // Запускаем таймер и обновляем каждую секунду
         updateTimer();
         setInterval(updateTimer, 1000);
         
-        // Для красоты открываем ссылку в том же окне (для WhatsApp/Telegram это ок)
-        // Дополнительно можно сделать предупреждение, если ссылка не настроена
-        document.getElementById('confirmBtn').addEventListener('click', function(e) {
-            if (confirmationLink === "#") {
-                e.preventDefault();
-                alert("Пожалуйста, укажите номер телефона или ссылку в коде (переменная confirmationLink)");
+        // ==========================================
+        // АНКЕТА И ОТПРАВКА В SMS
+        // ==========================================
+        
+        const form = document.getElementById('guestForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const guestName = document.getElementById('guestName').value.trim();
+            let guestPlus = document.getElementById('guestPlus').value.trim();
+            
+            if (!guestName) {
+                alert('Пожалуйста, укажите ваше имя и фамилию');
+                return;
             }
+            
+            // Формируем сообщение для SMS
+            let message = `Подтверждение на свадьбу Константина и Анастасии: `;
+            message += `Гость: ${guestName}`;
+            if (guestPlus) message += `, Доп. гости: ${guestPlus}`;
+            
+            // Кодируем сообщение для ссылки
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Создаем sms-ссылку и открываем её
+            window.open(`sms:${phoneNumber}?body=${encodedMessage}`, '_blank');
+            
+            // Показываем сообщение об успехе
+            successMessage.style.display = 'block';
+            form.reset();
+            
+            // Скрываем сообщение через 5 секунд
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
         });
+        
+        window.addEventListener('resize', () => goToSlide(currentSlide));
     </script>
-
 </body>
 </html>
